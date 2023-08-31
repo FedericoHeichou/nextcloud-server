@@ -79,7 +79,7 @@
     "_including %n hidden_::_including %n hidden_" : ["incloent-hi %n element ocult","incloent-hi %n elements ocults"],
     "You do not have permission to upload or create files here" : "No teniu permís per a pujar o crear fitxers aquí",
     "_Uploading %n file_::_Uploading %n files_" : ["S'està pujant %n fitxer","S'estan pujant %n fitxers"],
-    "New" : "Nou",
+    "New" : "Crea",
     "New file/folder menu" : "Menú de fitxer o carpeta nova",
     "Select file range" : "Selecciona un interval de fitxers",
     "{used}%" : "{used}%",
@@ -173,10 +173,11 @@
     "Go to the \"{dir}\" directory" : "Ves a la carpeta «{dir}»",
     "Select the row for {displayName}" : "Selecciona la fila per a {displayName}",
     "Rename file" : "Canvia el nom del fitxer",
-    "File name" : "Nom del fitxer",
     "A long time ago" : "Fa molt de temps",
     "This node is unavailable" : "Aquest node no està disponible",
     "Download file {name}" : "Baixa el fitxer {name}",
+    "File name" : "Nom del fitxer",
+    "Folder name" : "Nom de la carpeta",
     "\"{displayName}\" action executed successfully" : "L'acció «{displayName}» s'ha executat correctament",
     "\"{displayName}\" action failed" : "S'ha produït un error en l'acció «{displayName}»",
     "\"{name}\" is not an allowed filetype." : "«{name}» no és un tipus de fitxer permès.",
@@ -282,7 +283,7 @@
     "Open folder {name}" : "Obre la carpeta {name}",
     "This list is not fully rendered for performances reasons. The files will be rendered as you navigate through the list." : "Aquesta llista no es mostra completament per raons de rendiment. Es mostraran els fitxers a mesura que navegueu per la llista.",
     "Search for an account" : "Cerqueu un compte",
-    "Choose" : "Escolliu",
+    "Choose" : "Tria",
     "No files or folders have been deleted yet" : "Encara no s'ha suprimit cap fitxer o carpeta"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
