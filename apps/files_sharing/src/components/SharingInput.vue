@@ -34,9 +34,8 @@
 			:clear-search-on-blur="() => false"
 			:user-select="true"
 			:options="options"
-			@open="handleOpen"
 			@search="asyncFind"
-			@option:selected="openSharingDetails">
+			@option:selected="onSelected">
 			<template #no-options="{ search }">
 				{{ search ? noResultText : t('files_sharing', 'No recommendations. Start typing.') }}
 			</template>
@@ -47,7 +46,7 @@
 <script>
 import { generateOcsUrl } from '@nextcloud/router'
 import { getCurrentUser } from '@nextcloud/auth'
-import { emit } from '@nextcloud/event-bus'
+import { getCapabilities } from '@nextcloud/capabilities'
 import axios from '@nextcloud/axios'
 import debounce from 'debounce'
 import NcSelect from '@nextcloud/vue/dist/Components/NcSelect.js'
@@ -156,9 +155,9 @@ export default {
 	},
 
 	methods: {
-		handleOpen() {
-			// Fix dropdown not opening when viewer is open, see https://github.com/nextcloud/viewer/pull/1319
-			emit('viewer:trapElements:changed', this.$refs.select.$el)
+		onSelected(option) {
+			this.value = null // Reset selected option
+			this.openSharingDetails(option)
 		},
 
 		async asyncFind(query) {
@@ -182,7 +181,7 @@ export default {
 		async getSuggestions(search, lookup = false) {
 			this.loading = true
 
-			if (OC.getCapabilities().files_sharing.sharee.query_lookup_default === true) {
+			if (getCapabilities().files_sharing.sharee.query_lookup_default === true) {
 				lookup = true
 			}
 
@@ -198,7 +197,7 @@ export default {
 				this.SHARE_TYPES.SHARE_TYPE_SCIENCEMESH,
 			]
 
-			if (OC.getCapabilities().files_sharing.public.enabled === true) {
+			if (getCapabilities().files_sharing.public.enabled === true) {
 				shareType.push(this.SHARE_TYPES.SHARE_TYPE_EMAIL)
 			}
 
@@ -409,8 +408,8 @@ export default {
 				}
 			case this.SHARE_TYPES.SHARE_TYPE_CIRCLE:
 				return {
-					icon: 'icon-circle',
-					iconTitle: t('files_sharing', 'Circle'),
+					icon: 'icon-teams',
+					iconTitle: t('files_sharing', 'Team'),
 				}
 			case this.SHARE_TYPES.SHARE_TYPE_ROOM:
 				return {
@@ -506,7 +505,7 @@ export default {
 					shareType: value.shareType,
 					shareWith: value.shareWith,
 					password,
-					permissions: this.fileInfo.sharePermissions & OC.getCapabilities().files_sharing.default_permissions,
+					permissions: this.fileInfo.sharePermissions & getCapabilities().files_sharing.default_permissions,
 					attributes: JSON.stringify(this.fileInfo.shareAttributes),
 				})
 
@@ -566,7 +565,7 @@ export default {
 			background-repeat: no-repeat;
 			background-position: center;
 			background-color: var(--color-text-maxcontrast) !important;
-			div {
+			.avatardiv__initials-wrapper {
 				display: none;
 			}
 		}
